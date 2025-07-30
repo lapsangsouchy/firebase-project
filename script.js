@@ -61,6 +61,14 @@ function updateDB(event) {
   console.log(hours, minutes, seconds, year, month, day);
 
   /* Profile Image Handling */
+  let profile;
+
+  if (profileElem.value !== '') {
+    profile = profileElem.value;
+  } else {
+    profile =
+      'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
+  }
 
   // Create data object
   const data = {
@@ -74,7 +82,7 @@ function updateDB(event) {
     YEAR: year,
     MONTH: ++month,
     DAY: day,
-    PROFILE: profileElem.value,
+    PROFILE: profile,
   };
 
   // console.log the object
