@@ -152,8 +152,6 @@ form label {
   font-weight: 600;
 }
 
-/* NEW */
-
 .single-message-email {
   font-weight: 400;
   font-size: small;
@@ -162,6 +160,8 @@ form label {
 .single-message-time {
   font-size: x-small;
 }
+
+/* NEW */
 
 #preview-image {
   width: 30px;
