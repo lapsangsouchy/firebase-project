@@ -33,16 +33,8 @@
       <div id="all-messages">
         <!-- @NOTE sample message -->
         <!-- <div class="single-message">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg"
-            class="single-message-img"
-          />
-          <div class="single-message-head">
-            <p class="single-message-username">ALeeSmith:</p>
-            <p class="single-message-email">alexander.smith@allstarcode.org</p>
-            <p class="single-message-time">8/6/2024</p>
-            <p class="single-message-time">9:22:05 PM</p>
-          </div>
+          <p class="single-message-username">ALeeSmith:</p>
+          <p class="single-message-email">alexander.smith@allstarcode.org</p>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque
             laboriosam dignissimos molestias ad illum odio dolor beatae dolore!
@@ -58,40 +50,6 @@
           <div class="input-container">
             <label>Username:</label>
             <input type="text" id="username" />
-          </div>
-
-          <!-- @NOTE this input has an id #email -->
-          <div class="input-container">
-            <label>Email:</label>
-            <input type="text" id="email" />
-          </div>
-
-          <!-- @NOTE this input has an id #profile -->
-          <div class="input-container">
-            <label>Profile:</label>
-            <img
-              id="preview-image"
-              src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-            />
-            <input
-              type="text"
-              id="profile"
-              placeholder="Enter Image URL"
-              value="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-            />
-            <script>
-              let imagePreview = document.getElementById('preview-image');
-              let imageInput = document.getElementById('profile');
-
-              imageInput.onchange = function () {
-                if (imageInput.value !== '') {
-                  imagePreview.src = imageInput.value;
-                } else {
-                  imagePreview.src =
-                    'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
-                }
-              };
-            </script>
           </div>
 
           <!-- @NOTE this input has an id #message -->

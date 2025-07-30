@@ -151,27 +151,3 @@ form label {
 .single-message-username {
   font-weight: 600;
 }
-
-/* NEW */
-
-.single-message-email {
-  font-weight: 400;
-  font-size: small;
-}
-
-.single-message-time {
-  font-size: x-small;
-}
-
-#preview-image {
-  width: 30px;
-  height: 100%;
-  border-radius: 10px;
-}
-
-.single-message-img {
-  width: 50px;
-  height: 100%;
-  border-radius: 20px;
-  margin: 1%;
-}

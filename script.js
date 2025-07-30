@@ -16,18 +16,6 @@ const usernameElem = document.getElementById('username');
 const messageElem = document.getElementById('message');
 
 /**
- *  Add Reference to Email Input
- */
-
-const emailElem = document.getElementById('email');
-
-/**
- *  Add Reference to Profile Image Input
- */
-
-const profileElem = document.getElementById('profile');
-
-/**
  * Reference to the sendBtn with onclick event listener updateDB
  */
 
@@ -38,51 +26,10 @@ function updateDB(event) {
   // Prevent default refresh
   event.preventDefault();
 
-  /* Time handling! */
-
-  // Get the UNIX timestamp
-  let now = new Date();
-
-  console.log(now);
-
-  //get the UNIX timestamp
-  let timestamp = new Date().getTime();
-  console.log('Now: ' + now);
-  console.log('Timestamp: ' + timestamp);
-
-  //extract the hours, minutes, and seconds
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  let year = now.getFullYear();
-  let month = now.getMonth(); // this is the month but it starts with 0, so you have to add one when you are adding it to the database
-  let day = now.getDate(); // This is the OG day
-
-  console.log(hours, minutes, seconds, year, month, day);
-
-  /* Profile Image Handling */
-  let profile;
-
-  if (profileElem.value !== '') {
-    profile = profileElem.value;
-  } else {
-    profile =
-      'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
-  }
-
   // Create data object
   const data = {
     USERNAME: usernameElem.value,
-    EMAIL: emailElem.value,
     MESSAGE: messageElem.value,
-    TIMESTAMP: timestamp,
-    HOURS: hours,
-    MINUTES: minutes,
-    SECONDS: seconds,
-    YEAR: year,
-    MONTH: ++month,
-    DAY: day,
-    PROFILE: profile,
   };
 
   // console.log the object
@@ -113,83 +60,28 @@ function addMessageToBoard(rowData) {
 
   // Create a variable named singleMessage
   // that stores function call for makeSingleMessageHTML()
-  let singleMessage = makeSingleMessageHTML(
-    data.USERNAME,
-    data.EMAIL,
-    data.MESSAGE,
-    data.TIMESTAMP,
-    data.HOURS,
-    data.MINUTES,
-    data.SECONDS,
-    data.YEAR,
-    data.MONTH,
-    data.DAY,
-    data.PROFILE
-  );
+  let singleMessage = makeSingleMessageHTML(data.USERNAME, data.MESSAGE);
 
   // Append the new message HTML element to allMessages
   allMessages.append(singleMessage);
 }
 
-function makeSingleMessageHTML(
-  usernameTxt,
-  emailTxt,
-  messageTxt,
-  timestampTxt,
-  hoursTxt,
-  minutesTxt,
-  secondsTxt,
-  yearTxt,
-  monthTxt,
-  dayTxt,
-  profileTxt
-) {
+function makeSingleMessageHTML(usernameTxt, messageTxt) {
   // Create Parent Div
   let parentDiv = document.createElement('div');
   // Add Class name .single-message
   parentDiv.className = 'single-message';
-
-  /* DATE AND TIME ELEMENTS */
-
-  // Create Date P Tag
-  let dateP = document.createElement('p');
-  // Add the date data to P tag
-  dateP.innerHTML = `${monthTxt}/${dayTxt}/${yearTxt}`;
-  // Add class name single-message-time to dateP
-  dateP.className = 'single-message-time';
-
-  // Create Time P Tag
-  let timeP = document.createElement('p');
-  // Add the time data to P tag
-  timeP.innerHTML = `${hoursTxt}:${minutesTxt}:${secondsTxt}`;
-  // Add class name single-message-time to timeP
-  timeP.className = 'single-message-time';
 
   // Create Username P Tag
   let usernameP = document.createElement('p');
   usernameP.className = 'single-message-username';
   usernameP.innerHTML = usernameTxt + ':';
 
-  /* EMAIL ELEMENT */
-  // Create Email P Tag
-  let emailP = document.createElement('p');
-  emailP.className = 'single-message-email';
-  emailP.innerHTML = emailTxt;
-
-  /* NEW IMAGE ELEMENT */
-
-  // Create Profile Img element
-  let profileImg = document.createElement('img');
-  // Add Class name single-message-img
-  profileImg.className = 'single-message-img';
-  // Add database URL to src
-  profileImg.src = profileTxt;
-
   // Create message P Tag
   let messageP = document.createElement('p');
   messageP.innerHTML = messageTxt;
 
-  parentDiv.append(profileImg, usernameP, emailP, messageP, dateP, timeP);
+  parentDiv.append(usernameP, messageP);
 
   // Return Parent Div
   return parentDiv;
@@ -233,33 +125,3 @@ function clearChat() {
 
 // Set a timeout to clear chat messages after fifteen minutes (900000 milliseconds)
 setTimeout(clearChat, 900000);
-
-/* For Checking Images */
-
-/**
- * You can actually check to see if an image that was uploaded is a valid image or not
- *
- * To do so, there's a nifty function someone wrote up as a solution
- * on Stackoverflow:
- *
- * You can add this function in your code:
- * 
- * function checkImage(imageSrc, good, bad) {
-    var img = new Image();
-    img.onload = good;
-    img.onerror = bad;
-    img.src = imageSrc;
-  }
- *  
- * And it'll check if your image loads or causes an error
- * If the 'good' and 'bad' parameters can be functions that you use to return something
- * So if the image loads (onload) you can call a function that returns TRUE
- * If the image doesn't load (onerror) you can all a function that returns FALSE
- * 
- * That way, you can check in a conditional to see if the image is valid like so:
- * 
- * if (checkImage(profileElem.value, function () {return true;}, function () {return false;}))
- * 
- * 
- * 
-*/
