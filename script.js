@@ -22,12 +22,6 @@ const messageElem = document.getElementById('message');
 const emailElem = document.getElementById('email');
 
 /**
- *  Add Reference to Profile Image Input
- */
-
-const profileElem = document.getElementById('profile');
-
-/**
  * Reference to the sendBtn with onclick event listener updateDB
  */
 
@@ -38,40 +32,11 @@ function updateDB(event) {
   // Prevent default refresh
   event.preventDefault();
 
-  /* Time handling! */
-
-  // Get the UNIX timestamp
-  let now = new Date();
-
-  console.log(now);
-
-  //get the UNIX timestamp
-  let timestamp = new Date().getTime();
-  console.log('Now: ' + now);
-  console.log('Timestamp: ' + timestamp);
-
-  //extract the hours, minutes, and seconds
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-  let seconds = now.getSeconds();
-  let year = now.getFullYear();
-  let month = now.getMonth(); // this is the month but it starts with 0, so you have to add one when you are adding it to the database
-  let day = now.getDate(); // This is the OG day
-
-  console.log(hours, minutes, seconds, year, month, day);
-
   // Create data object
   const data = {
     USERNAME: usernameElem.value,
     EMAIL: emailElem.value,
     MESSAGE: messageElem.value,
-    TIMESTAMP: timestamp,
-    HOURS: hours,
-    MINUTES: minutes,
-    SECONDS: seconds,
-    YEAR: year,
-    MONTH: ++month,
-    DAY: day,
   };
 
   // console.log the object
@@ -105,52 +70,18 @@ function addMessageToBoard(rowData) {
   let singleMessage = makeSingleMessageHTML(
     data.USERNAME,
     data.EMAIL,
-    data.MESSAGE,
-    data.TIMESTAMP,
-    data.HOURS,
-    data.MINUTES,
-    data.SECONDS,
-    data.YEAR,
-    data.MONTH,
-    data.DAY
+    data.MESSAGE
   );
 
   // Append the new message HTML element to allMessages
   allMessages.append(singleMessage);
 }
 
-function makeSingleMessageHTML(
-  usernameTxt,
-  emailTxt,
-  messageTxt,
-  timestampTxt,
-  hoursTxt,
-  minutesTxt,
-  secondsTxt,
-  yearTxt,
-  monthTxt,
-  dayTxt
-) {
+function makeSingleMessageHTML(usernameTxt, emailTxt, messageTxt) {
   // Create Parent Div
   let parentDiv = document.createElement('div');
   // Add Class name .single-message
   parentDiv.className = 'single-message';
-
-  /* DATE AND TIME ELEMENTS */
-
-  // Create Date P Tag
-  let dateP = document.createElement('p');
-  // Add the date data to P tag
-  dateP.innerHTML = `${monthTxt}/${dayTxt}/${yearTxt}`;
-  // Add class name single-message-time to dateP
-  dateP.className = 'single-message-time';
-
-  // Create Time P Tag
-  let timeP = document.createElement('p');
-  // Add the time data to P tag
-  timeP.innerHTML = `${hoursTxt}:${minutesTxt}:${secondsTxt}`;
-  // Add class name single-message-time to timeP
-  timeP.className = 'single-message-time';
 
   // Create Username P Tag
   let usernameP = document.createElement('p');
@@ -167,7 +98,7 @@ function makeSingleMessageHTML(
   let messageP = document.createElement('p');
   messageP.innerHTML = messageTxt;
 
-  parentDiv.append(usernameP, emailP, messageP, dateP, timeP);
+  parentDiv.append(usernameP, emailP, messageP);
 
   // Return Parent Div
   return parentDiv;

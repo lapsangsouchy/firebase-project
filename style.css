@@ -152,13 +152,9 @@ form label {
   font-weight: 600;
 }
 
+/* NEW */
+
 .single-message-email {
   font-weight: 400;
   font-size: small;
-}
-
-/* NEW */
-
-.single-message-time {
-  font-size: x-small;
 }
