@@ -159,6 +159,7 @@ form label {
 
 /* NEW */
 
+.single-message-date,
 .single-message-time {
   font-size: x-small;
 }

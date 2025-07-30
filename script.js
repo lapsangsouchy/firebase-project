@@ -137,7 +137,7 @@ function makeSingleMessageHTML(
   // Add the date data to P tag
   dateP.innerHTML = `${monthTxt}/${dayTxt}/${yearTxt}`;
   // Add class name single-message-time to dateP
-  dateP.className = 'single-message-time';
+  dateP.className = 'single-message-date';
 
   // Create Time P Tag
   let timeP = document.createElement('p');
