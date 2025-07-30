@@ -66,34 +66,6 @@
             <input type="text" id="email" />
           </div>
 
-          <!-- @NOTE this input has an id #profile -->
-          <div class="input-container">
-            <label>Profile:</label>
-            <img
-              id="preview-image"
-              src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-            />
-            <input
-              type="text"
-              id="profile"
-              placeholder="Enter Image URL"
-              value="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
-            />
-            <script>
-              let imagePreview = document.getElementById('preview-image');
-              let imageInput = document.getElementById('profile');
-
-              imageInput.oninput = function () {
-                if (imageInput.value !== '') {
-                  imagePreview.src = imageInput.value;
-                } else {
-                  imagePreview.src =
-                    'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
-                }
-              };
-            </script>
-          </div>
-
           <!-- @NOTE this input has an id #message -->
           <div class="input-container">
             <label>Message:</label>

@@ -60,16 +60,6 @@ function updateDB(event) {
 
   console.log(hours, minutes, seconds, year, month, day);
 
-  /* Profile Image Handling */
-  let profile;
-
-  if (profileElem.value !== '') {
-    profile = profileElem.value;
-  } else {
-    profile =
-      'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
-  }
-
   // Create data object
   const data = {
     USERNAME: usernameElem.value,
@@ -82,7 +72,6 @@ function updateDB(event) {
     YEAR: year,
     MONTH: ++month,
     DAY: day,
-    PROFILE: profile,
   };
 
   // console.log the object
@@ -123,8 +112,7 @@ function addMessageToBoard(rowData) {
     data.SECONDS,
     data.YEAR,
     data.MONTH,
-    data.DAY,
-    data.PROFILE
+    data.DAY
   );
 
   // Append the new message HTML element to allMessages
@@ -176,20 +164,11 @@ function makeSingleMessageHTML(
   emailP.className = 'single-message-email';
   emailP.innerHTML = emailTxt;
 
-  /* NEW IMAGE ELEMENT */
-
-  // Create Profile Img element
-  let profileImg = document.createElement('img');
-  // Add Class name single-message-img
-  profileImg.className = 'single-message-img';
-  // Add database URL to src
-  profileImg.src = profileTxt;
-
   // Create message P Tag
   let messageP = document.createElement('p');
   messageP.innerHTML = messageTxt;
 
-  parentDiv.append(profileImg, usernameP, emailP, messageP, dateP, timeP);
+  parentDiv.append(usernameP, emailP, messageP, dateP, timeP);
 
   // Return Parent Div
   return parentDiv;
