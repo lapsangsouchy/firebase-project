@@ -83,7 +83,7 @@
               let imagePreview = document.getElementById('preview-image');
               let imageInput = document.getElementById('profile');
 
-              imageInput.onchange = function () {
+              imageInput.oninput = function () {
                 if (imageInput.value !== '') {
                   imagePreview.src = imageInput.value;
                 } else {
