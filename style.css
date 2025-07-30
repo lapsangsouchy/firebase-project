@@ -152,11 +152,11 @@ form label {
   font-weight: 600;
 }
 
+/* NEW */
+
 .single-message-email {
   font-weight: 400;
 }
-
-/* NEW */
 
 .single-message-head {
   margin: 1%;
@@ -170,8 +170,6 @@ form label {
 .single-message-time {
   font-size: x-small;
 }
-
-/* NEW */
 
 #preview-image {
   width: 30px;
