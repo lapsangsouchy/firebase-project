@@ -129,8 +129,7 @@ function makeSingleMessageHTML(
   secondsTxt,
   yearTxt,
   monthTxt,
-  dayTxt,
-  profileTxt
+  dayTxt
 ) {
   // Create Parent Div
   let parentDiv = document.createElement('div');
@@ -191,6 +190,7 @@ const handleEnterKey = (event) => {
 
 usernameElem.addEventListener('keydown', handleEnterKey);
 messageElem.addEventListener('keydown', handleEnterKey);
+emailElem.addEventListener('keydown', handleEnterKey);
 
 /**
  * FOR INSTRUCTOR PURPOSES ONLY - CLEARING MESSAGES EVERY 30 MINUTES
@@ -212,33 +212,3 @@ function clearChat() {
 
 // Set a timeout to clear chat messages after fifteen minutes (900000 milliseconds)
 setTimeout(clearChat, 900000);
-
-/* For Checking Images */
-
-/**
- * You can actually check to see if an image that was uploaded is a valid image or not
- *
- * To do so, there's a nifty function someone wrote up as a solution
- * on Stackoverflow:
- *
- * You can add this function in your code:
- * 
- * function checkImage(imageSrc, good, bad) {
-    var img = new Image();
-    img.onload = good;
-    img.onerror = bad;
-    img.src = imageSrc;
-  }
- *  
- * And it'll check if your image loads or causes an error
- * If the 'good' and 'bad' parameters can be functions that you use to return something
- * So if the image loads (onload) you can call a function that returns TRUE
- * If the image doesn't load (onerror) you can all a function that returns FALSE
- * 
- * That way, you can check in a conditional to see if the image is valid like so:
- * 
- * if (checkImage(profileElem.value, function () {return true;}, function () {return false;}))
- * 
- * 
- * 
-*/
