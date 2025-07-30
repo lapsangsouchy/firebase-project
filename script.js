@@ -122,24 +122,3 @@ const handleEnterKey = (event) => {
 usernameElem.addEventListener('keydown', handleEnterKey);
 messageElem.addEventListener('keydown', handleEnterKey);
 emailElem.addEventListener('keydown', handleEnterKey);
-
-/**
- * FOR INSTRUCTOR PURPOSES ONLY - CLEARING MESSAGES EVERY 30 MINUTES
- */
-// Function to clear the chat messages (you don't need to teach this!)
-function clearChat() {
-  // Clear the Firebase database
-  database
-    .remove()
-    .then(() => {
-      // Clear the chat display
-      allMessages.innerHTML = '';
-      console.log('Chat messages cleared successfully.');
-    })
-    .catch((error) => {
-      console.error('Error clearing chat messages:', error);
-    });
-}
-
-// Set a timeout to clear chat messages after fifteen minutes (900000 milliseconds)
-setTimeout(clearChat, 900000);
