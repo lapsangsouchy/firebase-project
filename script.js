@@ -22,12 +22,6 @@ const messageElem = document.getElementById('message');
 const emailElem = document.getElementById('email');
 
 /**
- *  Add Reference to Profile Image Input
- */
-
-const profileElem = document.getElementById('profile');
-
-/**
  * Reference to the sendBtn with onclick event listener updateDB
  */
 
