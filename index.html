@@ -68,20 +68,27 @@
 
           <!-- @NOTE this input has an id #profile -->
           <div class="input-container">
-            <label>Profile</label>
-            <img id="preview-image" src="" />
-            <input type="text" id="profile" placeholder="Enter Image URL" />
+            <label>Profile:</label>
+            <img
+              id="preview-image"
+              src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+            />
+            <input
+              type="text"
+              id="profile"
+              placeholder="Enter Image URL"
+              value="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+            />
             <script>
               let imagePreview = document.getElementById('preview-image');
-              imagePreview.style.display = 'none';
               let imageInput = document.getElementById('profile');
 
               imageInput.onchange = function () {
                 if (imageInput.value !== '') {
                   imagePreview.src = imageInput.value;
-                  imagePreview.style.display = 'inline';
                 } else {
-                  imagePreview.style.display = 'none';
+                  imagePreview.src =
+                    'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png';
                 }
               };
             </script>

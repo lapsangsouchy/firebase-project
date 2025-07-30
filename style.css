@@ -156,14 +156,6 @@ form label {
 
 .single-message-email {
   font-weight: 400;
-}
-
-.single-message-head {
-  margin: 1%;
-  min-width: 100px;
-}
-
-.single-message-email {
   font-size: small;
 }
 
@@ -173,13 +165,13 @@ form label {
 
 #preview-image {
   width: 30px;
-  height: 30px;
-  border-radius: 5px;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .single-message-img {
-  height: 50px;
   width: 50px;
-  border-radius: 10px;
+  height: 100%;
+  border-radius: 20px;
   margin: 1%;
 }

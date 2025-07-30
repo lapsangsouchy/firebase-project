@@ -34,81 +34,58 @@ const profileElem = document.getElementById('profile');
 const sendBtn = document.getElementById('send-btn');
 sendBtn.onclick = updateDB;
 
-async function updateDB(event) {
+function updateDB(event) {
   // Prevent default refresh
   event.preventDefault();
 
-  /* Add a check to see if any important fields are empty and if so, send an alert */
-  if (
-    usernameElem.value == '' ||
-    messageElem.value == '' ||
-    emailElem.value == ''
-  ) {
-    alert('Please enter something');
-  } else {
-    /* Time handling! */
+  /* Time handling! */
 
-    // Get the UNIX timestamp
-    let now = new Date();
+  // Get the UNIX timestamp
+  let now = new Date();
 
-    console.log(now);
+  console.log(now);
 
-    let date = now.toLocaleDateString();
+  //get the UNIX timestamp
+  let timestamp = new Date().getTime();
+  console.log('Now: ' + now);
+  console.log('Timestamp: ' + timestamp);
 
-    let time = now.toLocaleTimeString();
+  //extract the hours, minutes, and seconds
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
+  let year = now.getFullYear();
+  let month = now.getMonth(); // this is the month but it starts with 0, so you have to add one when you are adding it to the database
+  let day = now.getDate(); // This is the OG day
 
-    // To only include hours and minutes, add:
-    //
-    //  navigator.language, {
-    //   hour: '2-digit',
-    //   minute: '2-digit',
-    // }
-    //
-    // to parameter of toLocaleTimeString();
+  console.log(hours, minutes, seconds, year, month, day);
 
-    /* Profile Image Handling */
+  /* Profile Image Handling */
 
-    // Declare a profile variable we can either use user input for, or a random Dog
-    let profile;
+  // Create data object
+  const data = {
+    USERNAME: usernameElem.value,
+    EMAIL: emailElem.value,
+    MESSAGE: messageElem.value,
+    TIMESTAMP: timestamp,
+    HOURS: hours,
+    MINUTES: minutes,
+    SECONDS: seconds,
+    YEAR: year,
+    MONTH: ++month,
+    DAY: day,
+    PROFILE: profileElem.value,
+  };
 
-    // If profileElem.value has value, store in variable for database
+  // console.log the object
+  console.log(data);
 
-    if (profileElem.value) {
-      profile = profileElem.value;
-    } else {
-      // Otherwise, select a random image from Dog API
-      await fetch('https://dog.ceo/api/breeds/image/random')
-        .then(function (response) {
-          // .json() parses a JSON file so it's usable by JavaScript
-          return response.json();
-        })
-        .then(function (myJSON) {
-          // Assign profile to random dog url (inside "message")
-          profile = myJSON.message;
-        });
-    }
+  // GET *PUSH* PUT DELETE
+  // Write to our database
+  database.push(data);
 
-    // Create data object
-    const data = {
-      USERNAME: usernameElem.value,
-      EMAIL: emailElem.value,
-      MESSAGE: messageElem.value,
-      DATE: date,
-      TIME: time,
-      PROFILE: profile,
-    };
-
-    // console.log the object
-    console.log(data);
-
-    // GET *PUSH* PUT DELETE
-    // Write to our database
-    database.push(data);
-
-    // Reset message AND keep profile image the same
-    messageElem.value = '';
-    profileElem.value = profile;
-  }
+  // Reset message AND keep profile image the same
+  messageElem.value = '';
 }
 
 /**
@@ -132,8 +109,13 @@ function addMessageToBoard(rowData) {
     data.USERNAME,
     data.EMAIL,
     data.MESSAGE,
-    data.DATE,
-    data.TIME,
+    data.TIMESTAMP,
+    data.HOURS,
+    data.MINUTES,
+    data.SECONDS,
+    data.YEAR,
+    data.MONTH,
+    data.DAY,
     data.PROFILE
   );
 
@@ -145,8 +127,13 @@ function makeSingleMessageHTML(
   usernameTxt,
   emailTxt,
   messageTxt,
-  dateTxt,
-  timeTxt,
+  timestampTxt,
+  hoursTxt,
+  minutesTxt,
+  secondsTxt,
+  yearTxt,
+  monthTxt,
+  dayTxt,
   profileTxt
 ) {
   // Create Parent Div
@@ -154,26 +141,19 @@ function makeSingleMessageHTML(
   // Add Class name .single-message
   parentDiv.className = 'single-message';
 
-  /* NEW HEAD DIV FOR USERNAME, EMAIL, & TIMESTAMP */
-
-  // Create Head Div
-  let headDiv = document.createElement('div');
-  // Add Class name single-message-head
-  headDiv.className = 'single-message-head';
-
   /* DATE AND TIME ELEMENTS */
 
   // Create Date P Tag
   let dateP = document.createElement('p');
   // Add the date data to P tag
-  dateP.innerHTML = dateTxt;
+  dateP.innerHTML = `${monthTxt}/${dayTxt}/${yearTxt}`;
   // Add class name single-message-time to dateP
   dateP.className = 'single-message-time';
 
   // Create Time P Tag
   let timeP = document.createElement('p');
   // Add the time data to P tag
-  timeP.innerHTML = timeTxt;
+  timeP.innerHTML = `${hoursTxt}:${minutesTxt}:${secondsTxt}`;
   // Add class name single-message-time to timeP
   timeP.className = 'single-message-time';
 
@@ -188,8 +168,6 @@ function makeSingleMessageHTML(
   emailP.className = 'single-message-email';
   emailP.innerHTML = emailTxt;
 
-  headDiv.append(usernameP, emailP, dateP, timeP);
-
   /* NEW IMAGE ELEMENT */
 
   // Create Profile Img element
@@ -202,7 +180,8 @@ function makeSingleMessageHTML(
   // Create message P Tag
   let messageP = document.createElement('p');
   messageP.innerHTML = messageTxt;
-  parentDiv.append(profileImg, headDiv, messageP);
+
+  parentDiv.append(profileImg, usernameP, emailP, messageP, dateP, timeP);
 
   // Return Parent Div
   return parentDiv;
